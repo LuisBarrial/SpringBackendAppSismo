@@ -1,5 +1,6 @@
 package backendpage.proyectosismo.Security;
 
+import backendpage.proyectosismo.Model.Usuario;
 import backendpage.proyectosismo.Service.UsuarioService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -15,6 +16,10 @@ public class Autenticacion implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return usuarioService.findByLogin(username);
+        System.out.println("hola desde el user");
+        UserDetails usuario= usuarioService.findByLogin(username);
+        System.out.println(usuario.getAuthorities());
+
+        return usuario;
     }
 }

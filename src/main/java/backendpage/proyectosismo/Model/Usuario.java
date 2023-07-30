@@ -42,8 +42,7 @@ public class Usuario implements UserDetails {
     private List<Familia> familias;
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        return List.of(new SimpleGrantedAuthority("ROLE_USER"));
-    }
+        return listaRole.stream().map(role -> new SimpleGrantedAuthority(role.getNombre())).toList();    }
 
     public List<Rol> getListaRole() {
         return listaRole;

@@ -25,7 +25,6 @@ public class JWTInterceptor extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain filterChain) throws ServletException, IOException {
 
 
-            System.out.println("Hola soy el filtro");
             var token = recuperarToken(request);
             if (token==null)  token="Token";
 

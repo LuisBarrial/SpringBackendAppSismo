@@ -25,6 +25,7 @@ public class SecurityConfigurations {
    @Autowired
    private JWTInterceptor jwtInterceptor;
 
+
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws  Exception{
         return http.csrf(csrf->csrf.disable()).cors(cors->cors.disable())
@@ -33,6 +34,7 @@ public class SecurityConfigurations {
                 .authorizeHttpRequests(auth ->
                         auth.requestMatchers(HttpMethod.POST,"/usuario","/login").permitAll()
                                 .requestMatchers(HttpMethod.GET,"/login","/assets/**").permitAll()
+                                .requestMatchers(HttpMethod.GET, "/familia/**").hasAuthority("admin")
                         .anyRequest().authenticated())
                 .addFilterAfter(jwtInterceptor, UsernamePasswordAuthenticationFilter.class) // Agregar jwtInterceptor después de cualquier filtro de autenticación
                 .addFilterBefore(filterAutenticathion,UsernamePasswordAuthenticationFilter.class)

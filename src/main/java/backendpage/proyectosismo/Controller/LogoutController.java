@@ -31,8 +31,7 @@ public class LogoutController {
     private ScopedBeans scopedBeans;
 
     @PostMapping
-    public ResponseEntity<String> quitarAuth(@RequestBody String json){
-        System.out.println(json);
+    public ResponseEntity<String> quitarAuth(){
         blackListingService.blackListServiceJwt(scopedBeans.getJwt());
         SecurityContextHolder.clearContext(); // Eliminar la información de autenticación
         return ResponseEntity.status(HttpStatus.OK).body("Desconectado");
